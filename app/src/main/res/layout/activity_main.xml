@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F5F9"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- HEADER -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="IMAGE PROCESSING"
+            android:textColor="#1E3A5F"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="12dp"/>
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="● READY"
+            android:textColor="#15803D"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"/>
+
+        <!-- CONTROL PANEL -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. BẢNG ĐIỀU KHIỂN"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- E1 E2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnE1"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:text="E1 - Decode"/>
+
+            <Button
+                android:id="@+id/btnE2"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:text="E2 - Memory Pool"/>
+        </LinearLayout>
+
+        <!-- E3 E4 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnE3"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:text="E3 - Parallel"/>
+
+            <Button
+                android:id="@+id/btnE4"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1.5"
+                android:layout_margin="4dp"
+                android:text="E4 - Thread Scaling"/>
+        </LinearLayout>
+
+        <!-- E5 E6 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnE5"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:text="E5 - Resize"/>
+
+            <Button
+                android:id="@+id/btnE6"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:text="E6 - Format"/>
+        </LinearLayout>
+
+        <!-- E7 -->
+        <Button
+            android:id="@+id/btnE7"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
+            android:text="E7 - Best Configuration vs Baseline"/>
+
+        <!-- SETTINGS -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. THIẾT LẬP THAM SỐ"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="14dp">
+
+            <!-- BATCH SIZE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batch Size"
+                android:textStyle="bold"/>
+
+            <Spinner
+                android:id="@+id/spBatch"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- THREADS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of Threads"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spThreads"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- EXECUTION MODEL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Execution Model"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spExecution"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- DECODE STRATEGY -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decode Strategy"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spDecode"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- RESIZE ENGINE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resize Engine"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spEngine"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- OUTPUT FORMAT -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Output Format"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spFormat"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- QUALITY -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Output Quality"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spQuality"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- BITMAP POOL -->
+            <Switch
+                android:id="@+id/swBitmapPool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Bitmap Pool"
+                android:checked="false"
+                android:padding="8dp"/>
+
+            <!-- BUFFER POOL -->
+            <Switch
+                android:id="@+id/swBufferPool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Buffer Pool"
+                android:checked="false"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <!-- DASHBOARD -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. DASHBOARD HIỆU SUẤT"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:max="100"
+            android:progress="0"/>
+
+        <TextView
+            android:id="@+id/txtProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 / 0 images"
+            android:gravity="center"
+            android:padding="8dp"/>
+
+        <!-- RESULTS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="14dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BENCHMARK RESULTS"
+                android:textStyle="bold"
+                android:textColor="#1E3A5F"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txtTotalTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Time: --"/>
+
+            <TextView
+                android:id="@+id/txtThroughput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Throughput: --"/>
+
+            <TextView
+                android:id="@+id/txtPeakMemory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Peak Memory: --"/>
+
+            <TextView
+                android:id="@+id/txtGcCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GC Count: --"/>
+
+            <TextView
+                android:id="@+id/txtMedian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Median Latency: --"/>
+
+            <TextView
+                android:id="@+id/txtP95"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="P95 Latency: --"/>
+
+            <TextView
+                android:id="@+id/txtOutputSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Output Size: --"/>
+
+            <TextView
+                android:id="@+id/txtQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PSNR / SSIM: --"/>
+
+            <TextView
+                android:id="@+id/txtSpeedup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Speedup: --"/>
+
+        </LinearLayout>
+
+        <!-- EXECUTION LOG -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. EXECUTION LOG"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1E293B"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
+
+        <ScrollView
+            android:id="@+id/logScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="#172033"
+            android:fillViewport="true"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false">
+
+            <TextView
+                android:id="@+id/txtLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#A7F3D0"
+                android:textSize="12sp"
+                android:padding="12dp"
+                android:text="ImageProcessingLab initialized.\nWaiting for experiment..."
+                android:gravity="top"
+                android:textIsSelectable="true"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</ScrollView>
