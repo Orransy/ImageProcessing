@@ -289,7 +289,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BENCHMARK RESULTS"
+                android:text="KẾT QUẢ BENCHMARK"
                 android:textStyle="bold"
                 android:textColor="#1E3A5F"
                 android:textSize="16sp"/>
@@ -354,7 +354,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4. EXECUTION LOG"
+            android:text="4. LOG THỰC THI"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#1E293B"
@@ -377,7 +377,7 @@
                 android:textColor="#A7F3D0"
                 android:textSize="12sp"
                 android:padding="12dp"
-                android:text="ImageProcessingLab initialized.\nWaiting for experiment..."
+                android:text="ImageProcessing initialized.\nWaiting for experiment..."
                 android:gravity="top"
                 android:textIsSelectable="true"/>
 
