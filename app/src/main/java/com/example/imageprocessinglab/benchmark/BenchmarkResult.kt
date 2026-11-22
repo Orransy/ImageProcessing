@@ -11,5 +11,10 @@ data class BenchmarkResult(
     val outputSizeKb: Double,
     val psnr: Double,
     val ssim: Double,
-    val speedup: Double
+    val speedup: Double,
+    // --- bổ sung (có giá trị mặc định nên code cũ vẫn dùng được) ---
+    val label: String = "",
+    val threadsUsed: Int = 1,
+    val processed: Int = 0,
+    val failed: Int = 0
 )
