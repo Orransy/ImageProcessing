@@ -18,7 +18,41 @@
 constexpr int ENGINE_CPP_PLAIN = 1;
 constexpr int ENGINE_NEON = 2;
 
-// 1. THUẬT TOÁN BILINEAR RESIZE BẰNG C++ THUẦN (Mốc so sánh E5)
+// Bộ đệm tái sử dụng theo từng luồng (Thread-safe, triệt tiêu chi phí cấp phát Heap lặp lại)
+struct NeonLookupCache {
+    int cachedSrcW = -1;
+    int cachedDstW = -1;
+    std::vector<int> x0Table;
+    std::vector<int> x1Table;
+    std::vector<uint16_t> wxTable;
+    std::vector<uint16_t> invWxTable;
+
+    void prepare(int srcW, int dstW) {
+        if (cachedSrcW == srcW && cachedDstW == dstW) {
+            return;
+        }
+        cachedSrcW = srcW;
+        cachedDstW = dstW;
+
+        x0Table.resize(dstW);
+        x1Table.resize(dstW);
+        wxTable.resize(dstW);
+        invWxTable.resize(dstW);
+
+        const float scaleX = static_cast<float>(srcW) / static_cast<float>(dstW);
+        for (int x = 0; x < dstW; ++x) {
+            float gx = x * scaleX;
+            int x0 = static_cast<int>(gx);
+            x0Table[x] = x0 * 4;
+            x1Table[x] = std::min(x0 + 1, srcW - 1) * 4;
+            uint16_t wx = static_cast<uint16_t>((gx - x0) * 256.0f);
+            wxTable[x] = wx;
+            invWxTable[x] = 256 - wx;
+        }
+    }
+};
+
+// 1. THUẬT TOÁN BILINEAR RESIZE BẰNG C++ THUẦN (Mốc đối chiếu E5)
 static void resizeBilinearPlain(
         const uint8_t *srcPixels, int srcW, int srcH, int srcStride,
         uint8_t *dstPixels, int dstW, int dstH, int dstStride) {
@@ -58,28 +92,20 @@ static void resizeBilinearPlain(
     }
 }
 
-// 2. THUẬT TOÁN BILINEAR RESIZE TỐI ƯU SIMD ARM NEON (Xử lý 4 pixel = 16 kênh màu mỗi vòng lặp)
+// 2. THUẬT TOÁN BILINEAR RESIZE TỐI ƯU SIMD ARM NEON + THREAD-LOCAL CACHE
 static void resizeBilinearNeon(
         const uint8_t *srcPixels, int srcW, int srcH, int srcStride,
         uint8_t *dstPixels, int dstW, int dstH, int dstStride) {
 #if HAS_ARM_NEON
-    const float scaleX = static_cast<float>(srcW) / static_cast<float>(dstW);
+    thread_local NeonLookupCache cache;
+    cache.prepare(srcW, dstW);
+
+    const int *x0Table = cache.x0Table.data();
+    const int *x1Table = cache.x1Table.data();
+    const uint16_t *wxTable = cache.wxTable.data();
+    const uint16_t *invWxTable = cache.invWxTable.data();
+
     const float scaleY = static_cast<float>(srcH) / static_cast<float>(dstH);
-
-    std::vector<int> x0Table(dstW);
-    std::vector<int> x1Table(dstW);
-    std::vector<uint16_t> wxTable(dstW);
-    std::vector<uint16_t> invWxTable(dstW);
-
-    for (int x = 0; x < dstW; ++x) {
-        float gx = x * scaleX;
-        int x0 = static_cast<int>(gx);
-        x0Table[x] = x0 * 4;
-        x1Table[x] = std::min(x0 + 1, srcW - 1) * 4;
-        uint16_t wx = static_cast<uint16_t>((gx - x0) * 256.0f);
-        wxTable[x] = wx;
-        invWxTable[x] = 256 - wx;
-    }
 
     for (int y = 0; y < dstH; ++y) {
         float gy = y * scaleY;
